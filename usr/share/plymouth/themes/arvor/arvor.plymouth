@@ -1,0 +1,9 @@
+[Plymouth Theme]
+Name=arvor
+Description=Arvor Linux boot theme
+Version=0.1.26
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/arvor
+ScriptFile=/usr/share/plymouth/themes/arvor/arvor.script

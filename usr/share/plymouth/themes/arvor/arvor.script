@@ -1,0 +1,44 @@
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+
+frame_count = 48;
+frame_divider = 2;
+
+logo.image = Image("logo.png");
+logo.sprite = Sprite(logo.image);
+
+for (i = 0; i < frame_count; i++)
+    spinner.frames[i] = Image("throbber-" + i + ".png");
+
+spinner.sprite = Sprite(spinner.frames[0]);
+
+screen_w = Window.GetWidth();
+screen_h = Window.GetHeight();
+
+logo_w = logo.image.GetWidth();
+logo_h = logo.image.GetHeight();
+spinner_w = spinner.frames[0].GetWidth();
+spinner_h = spinner.frames[0].GetHeight();
+
+gap = 48;
+block_h = logo_h + gap + spinner_h;
+top_y = (screen_h - block_h) / 2;
+
+logo.sprite.SetX(Window.GetX() + (screen_w - logo_w) / 2);
+logo.sprite.SetY(Window.GetY() + top_y);
+logo.sprite.SetZ(10);
+
+spinner.sprite.SetX(Window.GetX() + (screen_w - spinner_w) / 2);
+spinner.sprite.SetY(Window.GetY() + top_y + logo_h + gap);
+spinner.sprite.SetZ(10);
+
+counter = 0;
+
+fun refresh_callback ()
+{
+    counter++;
+    index = Math.Int(counter / frame_divider) % frame_count;
+    spinner.sprite.SetImage(spinner.frames[index]);
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);
